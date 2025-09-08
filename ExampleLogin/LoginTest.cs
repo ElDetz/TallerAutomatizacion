@@ -1,7 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace ExampleLogin
 {
@@ -9,12 +10,13 @@ namespace ExampleLogin
     public class LoginTest
     {
         private IWebDriver _driver;
+        private WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
         {
-            // Inicializar el WebDriver antes de cada prueba
             _driver = new ChromeDriver();
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
 
         [Test]
@@ -43,7 +45,7 @@ namespace ExampleLogin
             Thread.Sleep(4000);
 
             // Validar el éxito del login
-            var successElement = _driver.FindElement(By.XPath("//img[@id='ImagenLogo']"));
+            var successElement = _wait.Until(drv => drv.FindElement(By.XPath("//img[@id='ImagenLogo']")));
             Assert.IsNotNull(successElement, "No se encontró el elemento de éxito después del login.");
         }
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleLogin", "ExampleLogin\ExampleLogin.csproj", "{C17BA8C4-DAF5-4B8F-9B61-BC3DEEE9C224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReqnrollProject1", "ReqnrollProject1\ReqnrollProject1.csproj", "{92D464AF-BD6F-474B-A2DE-B2C3A79DC1F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSales", "ReqnrollProject1\ExampleSales.csproj", "{92D464AF-BD6F-474B-A2DE-B2C3A79DC1F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

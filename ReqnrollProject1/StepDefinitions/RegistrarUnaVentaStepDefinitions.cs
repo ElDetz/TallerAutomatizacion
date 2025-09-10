@@ -17,14 +17,13 @@ namespace ExampleSales.StepDefinitions
             this.driver = driver;
             this.newSale = new VentasPage(driver);
         }
-
-        /*[Given("Agregar Concepto {string}")]
+        [Given("Agregar concepto: {string}")]
         public void GivenAgregarConcepto(string concept)
         {
             newSale.SelectConcept(concept);
-        }*/
+        }
 
-        [Given("Agregar concepto:")]
+        /*[Given("Agregar concepto:")]
         public void WhenAgregarConcepto(DataTable table)
         {
             foreach (var row in table.Rows)
@@ -35,7 +34,7 @@ namespace ExampleSales.StepDefinitions
                 newSale.TypeSelectConcept(option, value);
             }
         }
-
+        */
 
 
         [Given("Ingresar Cantidad {string} y Precio Unitario {string}")]

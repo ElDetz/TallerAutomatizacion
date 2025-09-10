@@ -116,14 +116,32 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
-                            "Opción",
-                            "Valor"});
-                table1.AddRow(new string[] {
-                            "barra",
-                            "108300559"});
 #line 11
- await testRunner.AndAsync("Agregar concepto:", ((string)(null)), table1, "And ");
+ await testRunner.AndAsync("Agregar concepto: \'178\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 12
+ await testRunner.AndAsync("Ingresar Cantidad \'2\' y Precio Unitario \'2\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 13
+ await testRunner.AndAsync("Activar IGV \'Si\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 14
+ await testRunner.AndAsync("Ingresar Cliente \'71310154\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 15
+ await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'BOLETA DE VENTA ELECTRONICA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 16
+ await testRunner.AndAsync("Seleccionar Tipo de pago \'Contado\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 17
+ await testRunner.AndAsync("Seleccionar Medio de Pago \'TDEB\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 18
+ await testRunner.AndAsync("Ingresar Datos del Pago: \'XD\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 19
+ await testRunner.ThenAsync("Guardar venta", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

@@ -34,10 +34,10 @@ namespace ExampleSales.Pages.Ventas
         public static readonly By ConceptPrice = By.Id("precio-0");
         public static readonly By IgvActive = By.Id("ventaigv0");
         public static readonly By IdCustomer = By.Id("DocumentoIdentidad");
-        public static readonly By TypeDocumentField = By.CssSelector("#select2-TipoComprobante-fq-container");
+        public static readonly By TypeDocumentField = By.XPath("//body/div[@id='wrapper']/div[1]/section[1]/div[1]/div[1]/div[1]/form[1]/div[2]/facturacion-venta[1]/form[1]/div[1]/div[2]/div[1]/div[6]/selector-comprobante[1]/div[1]/ng-form[1]/div[1]/div[1]/span[1]/span[1]/span[1]");
         public static readonly By DebitCardButton = By.Id("labelMedioPago-0-18");
         public static readonly By CashPaymentOption = By.Id("radio1");
-        public static readonly By PaymentInformation = By.Id("informacion");
+        public static readonly By PaymentInformation = By.XPath("//div[@class='box box-primary box-solid']//textarea[@id='informacion']");
         public static readonly By SaveSaleButton = By.XPath("//button[normalize-space()='GUARDAR VENTA']");
         public static readonly By OverlayPath = By.ClassName("block-ui-overlay");
 
@@ -103,21 +103,21 @@ namespace ExampleSales.Pages.Ventas
         {
             switch (option)
             {
-                case "FACTURA ELECTRONICA":
+                case "FACTURA":
 
-                    utilities.SelectComboBox(TypeDocumentField, option);
-
-                    break;
-
-                case "BOLETA DE VENTA ELECTRONICA":
-
-                    utilities.SelectComboBox(TypeDocumentField, option);
+                    utilities.SelectOption(TypeDocumentField, option);
 
                     break;
 
-                case "NOTA DE COMPRA (INTERNA)":
+                case "BOLETA":
 
-                    utilities.SelectComboBox(TypeDocumentField, option);
+                    utilities.SelectOption(TypeDocumentField, option);
+
+                    break;
+
+                case "NOTA":
+
+                    utilities.SelectOption(TypeDocumentField, option);
                     break;
 
                 default:
@@ -191,8 +191,6 @@ namespace ExampleSales.Pages.Ventas
         }
         public void InformationPayment(string information)
         {
-            utilities.Overlay();
-
             utilities.EnterField(PaymentInformation, information);
 
         }
@@ -200,6 +198,7 @@ namespace ExampleSales.Pages.Ventas
         public void SaveSale()
         {
             utilities.ClickButton(SaveSaleButton);
+            Thread.Sleep(4000);
 
         }
     }

@@ -129,7 +129,7 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("Ingresar Cliente \'71310154\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 15
- await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'BOLETA DE VENTA ELECTRONICA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'NOTA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 16
  await testRunner.AndAsync("Seleccionar Tipo de pago \'Contado\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

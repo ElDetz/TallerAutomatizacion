@@ -74,9 +74,9 @@ namespace ExampleSales.StepDefinitions
         }
 
         [Given("Ingresar Datos del Pago: {string}")]
-        public void GivenIngresarDatosDelPago(string option)
+        public void GivenIngresarDatosDelPago(string value)
         {
-            newSale.InformationPayment(option);
+            newSale.InformationPayment(value);
         }
 
         [Then("Guardar venta")]

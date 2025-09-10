@@ -1,63 +1,90 @@
-using System;
+using ExampleSales.Pages.Ventas;
+using OpenQA.Selenium;
 using Reqnroll;
+using System;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace ExampleSales.StepDefinitions
 {
     [Binding]
     public class RegistrarUnaVentaStepDefinitions
     {
-        [Given("Agregar concepto:")]
-        public void GivenAgregarConcepto(DataTable dataTable)
+        private IWebDriver driver;
+        VentasPage newSale;
+
+        public RegistrarUnaVentaStepDefinitions(IWebDriver driver)
         {
-            throw new PendingStepException();
+            this.driver = driver;
+            this.newSale = new VentasPage(driver);
         }
 
-        [Given("Ingresa los siguientes datos del producto:")]
-        public void GivenIngresaLosSiguientesDatosDelProducto(DataTable dataTable)
+        /*[Given("Agregar Concepto {string}")]
+        public void GivenAgregarConcepto(string concept)
         {
-            throw new PendingStepException();
+            newSale.SelectConcept(concept);
+        }*/
+
+        [Given("Agregar concepto:")]
+        public void WhenAgregarConcepto(DataTable table)
+        {
+            foreach (var row in table.Rows)
+            {
+                string option = row["Opción"];
+                string value = row["Valor"];
+
+                newSale.TypeSelectConcept(option, value);
+            }
+        }
+
+
+
+        [Given("Ingresar Cantidad {string} y Precio Unitario {string}")]
+        public void GivenIngresarCantidadYPrecioUnitario(string amount, string price)
+        {
+            newSale.InputAmountAndPrice(amount, price);
         }
 
         [Given("Activar IGV {string}")]
-        public void GivenActivarIGV(string sI)
+        public void GivenActivarIGV(string option)
         {
-            throw new PendingStepException();
+            newSale.SelectIGV(option);
         }
 
-        [Given("Seleccionar tipo de cliente:")]
-        public void GivenSeleccionarTipoDeCliente(DataTable dataTable)
+        [Given("Ingresar Cliente {string}")]
+        public void GivenIngresarCliente(string dni)
         {
-            throw new PendingStepException();
+            newSale.EnterCustomer(dni);
         }
 
-        [Given("Seleccionar tipo de comprobante")]
-        public void GivenSeleccionarTipoDeComprobante(DataTable dataTable)
+        [Given("Seleccionar Tipo de Comprobante {string}")]
+        public void GivenSeleccionarTipoDeComprobante(string option)
         {
-            throw new PendingStepException();
+            newSale.SelectTypeDocument(option);
         }
 
-        [Given("Seleccionar tipo de pago {string}")]
-        public void GivenSeleccionarTipoDePago(string contado)
+        [Given("Seleccionar Tipo de pago {string}")]
+        public void GivenSeleccionarTipoDePago(string option)
         {
-            throw new PendingStepException();
+            newSale.SelectPaymentType(option);
         }
 
-        [Given("Seleccionar el medio de pago {string}")]
-        public void GivenSeleccionarElMedioDePago(string tDEB)
+        [Given("Seleccionar Medio de Pago {string}")]
+        public void GivenSeleccionarMedioDePago(string option)
         {
-            throw new PendingStepException();
+            newSale.PaymentMethod(option);
         }
 
-        [Given("Rellene datos de la tarjeta:")]
-        public void GivenRelleneDatosDeLaTarjeta(DataTable dataTable)
+        [Given("Ingresar Datos del Pago: {string}")]
+        public void GivenIngresarDatosDelPago(string option)
         {
-            throw new PendingStepException();
+            newSale.InformationPayment(option);
         }
 
         [Then("Guardar venta")]
         public void ThenGuardarVenta()
         {
-            throw new PendingStepException();
+            newSale.SaveSale();
         }
+
     }
 }

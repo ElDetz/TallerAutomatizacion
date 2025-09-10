@@ -329,5 +329,100 @@ namespace ExampleSales.Pages.Helpers
             Assert.That(dropdown.SelectedOption.Text, Is.EqualTo(_option));
             Delay(2);
         }
+
+        //Helpers
+        public class Path()
+        {
+            public static readonly By SelectODropdownOptions = By.CssSelector(".select2-results__options");
+            public static readonly By OverlayElement = By.ClassName("block-ui-overlay");
+
+        }
+        public void Overlay()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.CssSelector("div.block-ui-overlay")));
+        }
+
+        public void EnterField(By _path, string _field)
+        {
+            var element = driver.FindElement(_path);
+            element.Click();  // Asegura que el campo esté activo
+
+            // Borra el campo completamente con Ctrl + A y Suprimir
+            element.SendKeys(Keys.Control + "a");
+            element.SendKeys(Keys.Delete);
+
+            // Espera un momento para asegurarse de que el campo esté vacío
+            Thread.Sleep(100);
+
+            // Verifica si el campo quedó vacío antes de ingresar el nuevo texto
+            if (!string.IsNullOrEmpty(element.GetAttribute("value")))
+            {
+                element.Clear();
+            }
+
+            // Ingresa el nuevo valor
+            element.SendKeys(_field);
+            element.SendKeys(Keys.Enter);
+            Thread.Sleep(4000);
+        }
+
+        public void SelectComboBox(By _path, string data)
+        {
+            // Ubicar el elemento <select>
+            IWebElement selectElement = driver.FindElement(_path);
+
+            // Crear el objeto SelectElement
+            SelectElement dropdown = new SelectElement(selectElement);
+
+            // Seleccionar el ROL pasado como parámetro
+            dropdown.SelectByText(data);
+
+            // Validar que la opción seleccionada es la esperada
+            Assert.That(dropdown.SelectedOption.Text, Is.EqualTo(data),
+                $"La opción seleccionada '{dropdown.SelectedOption.Text}' no coincide con '{data}'");
+
+            // Pequeña pausa para visualización (opcional)
+            Thread.Sleep(1000);
+        }
+        public void WaitForElementVisible(By locator)
+        {
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(locator));
+            }
+            catch (WebDriverTimeoutException)
+            {
+                throw new NoSuchElementException($"El elemento con el localizador {locator} no se hizo visible dentro del tiempo de espera.");
+            }
+        }
+
+        public void WaitExistsVisible(By pathComponent, By pathOverlay)
+        {
+            ElementExists(pathComponent);
+            WaitForElementVisible(pathOverlay);
+        }
+
+        public void SelectOption(By pathComponent, string option)
+        {
+
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementIsVisible(pathComponent));
+
+                IWebElement dropdown = driver.FindElement(pathComponent);
+                dropdown.Click();
+
+                wait.Until(ExpectedConditions.ElementIsVisible(Path.SelectODropdownOptions));
+
+                IWebElement optionElement = driver.FindElement(By.XPath($"//li[contains(text(), '{option}')]"));
+                optionElement.Click();
+            }
+            catch (NoSuchElementException ex)
+            {
+                Console.WriteLine($"Error: No se encontró la opción '{option}' en el menú desplegable. Detalle: {ex.Message}");
+            }
+        }
     }
 }

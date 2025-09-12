@@ -24,34 +24,31 @@ namespace VentaSinPOM
             // NAVEGAR EN URL
             _driver.Navigate().GoToUrl("https://taller2025-qa.sigesonline.com/");
 
-            Thread.Sleep(4000);
+            WebDriverWait espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
 
             // LOCALIZADORES DE ELEMENTOS 
-            var usernameField = _driver.FindElement(By.XPath("//input[@id='Email']"));
+            var usernameLocator = By.Id("Email");
             var passwordField = _driver.FindElement(By.XPath("//input[@id='Password']"));
             var loginButton = _driver.FindElement(By.XPath("//button[contains(text(),'Iniciar')]"));
 
             //INICIAR SESIÓN CON CREDENCIALES
+            var usernameField = espera.Until(ExpectedConditions.ElementIsVisible(usernameLocator));
             usernameField.SendKeys("admin@plazafer.com");
-            Thread.Sleep(2000);
             passwordField.SendKeys("calidad");
-            Thread.Sleep(2000);
-            loginButton.Click(); // Ingresar
-            Thread.Sleep(4000);
+            loginButton.Click();
 
             // BOTÓN ACEPTAR
-            var acceptButton = _driver.FindElement(By.XPath("//button[contains(text(),'Aceptar')]"));
+            var acceptButton = espera.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[contains(text(),'Aceptar')]")));
             acceptButton.Click();
-            Thread.Sleep(4000);
 
             //INGRESAR AL MÓDULO VENTA
-            var saleButton = _driver.FindElement(By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Venta']"));
+            var saleButton = espera.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Venta']")));
             saleButton.Click();
 
-            //INGRESAR AL SUBMÓDULO NUEVA VENTA
+            // INGRESAR AL SUBMÓDULO NUEVA VENTA
             var newSaleButton = _driver.FindElement(By.XPath("//a[normalize-space()='Nueva Venta']"));
             newSaleButton.Click();
-            Thread.Sleep(9000);
+            Thread.Sleep(12000);
 
             //SELECCIONAR UN PRODUCTO
             try
@@ -74,26 +71,24 @@ namespace VentaSinPOM
 
             //INGRESAR LA CANTIDAD DEL PRODUCTO
             var conceptAmount = By.Id("cantidad-0");
-            var element = _driver.FindElement(conceptAmount);
+            WebDriverWait wait1 = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            var element = wait1.Until(ExpectedConditions.ElementToBeClickable(conceptAmount));
             element.Click();
             element.SendKeys(Keys.Control + "a");
-            Thread.Sleep(100);
+            wait1.Until(driver => element.GetAttribute("value").Length >= 0);
             element.SendKeys("2");
 
             //ACTIVAR IGV
             var igv = _driver.FindElement(By.Id("ventaigv0"));
             igv.Click();
-            Thread.Sleep(1000);
 
             //SELECCIONAR EL DOC. DEL CLIENTE
             var client = By.Id("DocumentoIdentidad");
             var element2 = _driver.FindElement(client);
             element2.Click();
             element2.SendKeys(Keys.Control + "a");
-            Thread.Sleep(100);
             element2.SendKeys("72380461");
             element2.SendKeys(Keys.Enter);
-            Thread.Sleep(2000);
 
             //SELECCIONAR COMPROBANTE
             try
@@ -109,17 +104,15 @@ namespace VentaSinPOM
 
                 IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"NOTA"}')]"));
                 optionElement.Click();
-                Thread.Sleep(2000);
             }
             catch (NoSuchElementException ex)
             {
-                Console.WriteLine($"Error: No se encontró la opción '{"NOTA"}' en el menú desplegable. Detalle: {ex.Message}");
+                Console.WriteLine($"Error: No se encontró la opción '{"BOLETA"}' en el menú desplegable. Detalle: {ex.Message}");
             }
 
             //SELECCIONAR MEDIO DE PAGO
             var DebitCardButton = By.Id("labelMedioPago-0-18");
             ClickButton(DebitCardButton);
-            Thread.Sleep(3000);
 
             //INGRESAR INFORMACIÓN
             var information = _driver.FindElement(By.XPath("//div[@class='box box-primary box-solid']//textarea[@id='informacion']"));

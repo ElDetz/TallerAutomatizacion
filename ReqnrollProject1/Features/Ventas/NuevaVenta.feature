@@ -8,7 +8,7 @@ And Se ingresa al módulo 'Nueva Venta'
 @NuevaVenta
 
 Scenario: Registro de una nueva venta con pago al contado
-	And Agregar concepto: '178'	
+	And Agregar concepto: '1010-3'	
 	And Ingresar Cantidad '2' y Precio Unitario '2'
 	And Activar IGV 'Si'
 	And Ingresar Cliente '71310154'

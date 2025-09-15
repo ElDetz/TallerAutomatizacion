@@ -28,14 +28,13 @@ namespace ExampleSales.Pages
         // INICIO DE SESION
         public void LoginToApplication(string _user, string _password)
         {
-            driver.Url = "https://pruebas-qa.sigesonline.com/";
+            driver.Url = "https://taller2025-qa.sigesonline.com/";
             utilities.InputTexto(usernameField, _user); // campo user
             utilities.InputTexto(passwordField, _password); // campo contraseña
             utilities.ClickButton(loginButton); // boton login
             utilities.VisibilidadElement(acceptButton);
             utilities.ClickButton(acceptButton); // boton aceptar
         }
-
 
         public void enterModulo(string _modulo)
         {
@@ -51,8 +50,6 @@ namespace ExampleSales.Pages
                     utilities.ClickButton(NuevaVentaField);
 
                     break;
-
-                
 
                 default:
                     throw new ArgumentException($"El {_modulo} no es válido.");

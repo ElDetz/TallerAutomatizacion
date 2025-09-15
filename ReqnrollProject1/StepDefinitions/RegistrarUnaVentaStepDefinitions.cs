@@ -23,24 +23,10 @@ namespace ExampleSales.StepDefinitions
             newSale.SelectConcept(concept);
         }
 
-        /*[Given("Agregar concepto:")]
-        public void WhenAgregarConcepto(DataTable table)
+        [Given("Ingreso la cantidad {string}")]
+        public void GivenIngresoLaCantidad(string amount)
         {
-            foreach (var row in table.Rows)
-            {
-                string option = row["Opción"];
-                string value = row["Valor"];
-
-                newSale.TypeSelectConcept(option, value);
-            }
-        }
-        */
-
-
-        [Given("Ingresar Cantidad {string} y Precio Unitario {string}")]
-        public void GivenIngresarCantidadYPrecioUnitario(string amount, string price)
-        {
-            newSale.InputAmountAndPrice(amount, price);
+            newSale.InputAmount(amount);
         }
 
         [Given("Activar IGV {string}")]

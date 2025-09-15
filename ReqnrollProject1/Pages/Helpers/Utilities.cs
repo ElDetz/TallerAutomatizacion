@@ -158,19 +158,6 @@ namespace ExampleSales.Pages.Helpers
             }
         }
 
-        /*
-        public void ClickButton(By _button)
-        {
-            if (driver.FindElements(_button).Count == 0)
-            {
-                throw new NoSuchElementException($"El elemento con el localizador {_button} no se encontró.");
-            }
-            Delay(2);
-            WaitForOverlayToDisappear(); // OVERLAY
-            wait.Until(ExpectedConditions.ElementToBeClickable(_button)); // Espera hasta que el elemento sea clickeable
-            driver.FindElement(_button).Click();
-        }
-        */
         public bool ClickButton(By _button)
         {
             try
@@ -203,8 +190,6 @@ namespace ExampleSales.Pages.Helpers
                 return false;
             }
         }
-
-
 
         // MODALES
         public void ClickButtonInModal(IWebElement _element, By buttonLocator)
@@ -287,22 +272,12 @@ namespace ExampleSales.Pages.Helpers
             Delay(2);
         }
 
-
         public void SelecOption(IWebElement _element, By _path, string option)
         {
             try
             {
                 wait.Until(ExpectedConditions.ElementIsVisible(_path));
                 wait.Until(ExpectedConditions.ElementToBeClickable(_path));
-
-
-                /*
-                // Abre el menú desplegable
-                IWebElement dropdown = _element.FindElement(_path);
-                //dropdown.Click();
-                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                js.ExecuteScript("arguments[0].click();", dropdown);
-                */
 
                 // Espera explícita para que las opciones sean visibles
                 wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".select2-results__options")));

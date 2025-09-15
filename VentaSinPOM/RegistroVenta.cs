@@ -181,9 +181,8 @@ namespace VentaSinPOM
         [TearDown]
         public void TearDown()
         {
-            // Cerrar el navegador después de cada prueba
             _driver.Quit();
-            _driver.Dispose(); // Libera memoria y recursos no administrados
+            _driver.Dispose(); 
         }
     }
 }

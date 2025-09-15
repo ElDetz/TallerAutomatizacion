@@ -44,41 +44,17 @@ namespace ExampleSales.Pages.Ventas
 
         public void SelectConcept(string codeconcept)
         {
-            utilities.EnterField(txtBarCode, codeconcept);
-        }
-
-        public void TypeSelectConcept(string option, string value)
-        {
-            option = option.ToUpper();
             utilities.ElementExists(txtBarCode);
-            switch (option)
-            {
-                case "BARRA":
-                    utilities.WaitExistsVisible(txtBarCode, OverlayPath);
-                    utilities.EnterField(txtBarCode, value);
-                    Thread.Sleep(4000);
-                    Console.WriteLine("✅ El producto fue agregado correctamente.");
-                    break;
-
-                case "SELECCION":
-                    Thread.Sleep(4000);
-                    utilities.SelectOption(selConceptSelection, value);
-                    Thread.Sleep(5000);
-                    Console.WriteLine("✅ El producto fue agregado correctamente.");
-                    break;
-
-                default:
-                    throw new ArgumentException($"La opción {option} no es válido");
-            }
+            Thread.Sleep(4000);
+            utilities.SelectOption(selConceptSelection, codeconcept);
+            Thread.Sleep(5000);
+            Console.WriteLine("✅ El producto fue agregado correctamente.");
         }
 
-        public void InputAmountAndPrice(string amount, string price)
+        public void InputAmount(string amount)
         {
             utilities.Overlay();
-
             utilities.EnterField(ConceptAmount, amount);
-
-            utilities.EnterField(ConceptPrice, price);
         }
 
         public void SelectIGV(string option)

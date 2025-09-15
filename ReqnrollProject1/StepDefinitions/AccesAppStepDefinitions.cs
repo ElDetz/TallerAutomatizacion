@@ -24,18 +24,6 @@ namespace ExampleSales.StepDefinitions
             accessPage.LoginToApplication(_user, _password);
         }
 
-        /*
-        [Given(@"Inicio de sesion con usuario")]
-        public void GivenInicioDeSesionConUsuario(Table table)
-        {
-            driver.Url = "https://tintoymadero-qa.sigesonline.com/";
-
-            dynamic data = table.CreateInstance<dynamic>();
-
-            // Realizar el inicio de sesión
-            loginPage.LoginToApplication(data.Username, data.Password);
-        }
-        */
         [Given("Se ingresa al módulo {string}")]
         public void GivenSeIngresaAlModulo(string _modulo)
         {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSales", "ReqnrollProject1\ExampleSales.csproj", "{92D464AF-BD6F-474B-A2DE-B2C3A79DC1F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VentaConPOM", "ReqnrollProject1\VentaConPOM.csproj", "{92D464AF-BD6F-474B-A2DE-B2C3A79DC1F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleLogin", "TestProject1\ExampleLogin.csproj", "{44F3D6A4-1EE7-4992-8927-E180C0D0136E}"
 EndProject

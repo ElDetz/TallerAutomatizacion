@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace ExampleSales.Features.Ventas
+namespace VentaConPOM.Features.Ventas
 {
     using Reqnroll;
     using System;
@@ -29,7 +29,7 @@ namespace ExampleSales.Features.Ventas
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Ventas", "NuevaVenta", "A short summary of the feature", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Ventas", "NuevaVenta", "Registrar una venta con tipo de pago al contado", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "NuevaVenta.feature"
 #line hidden
@@ -87,7 +87,7 @@ namespace ExampleSales.Features.Ventas
 #line 4
 #line hidden
 #line 5
-await testRunner.GivenAsync("Inicio de sesión con usuario \'admin@tintoymadero.com\' y contraseña \'calidad\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+await testRunner.GivenAsync("Inicio de sesión con usuario \'admin@plazafer.com\' y contraseña \'calidad\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 6
 await testRunner.AndAsync("Se ingresa al módulo \'Nueva Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -117,10 +117,10 @@ this.ScenarioInitialize(scenarioInfo);
 await this.FeatureBackgroundAsync();
 #line hidden
 #line 11
- await testRunner.AndAsync("Agregar concepto: \'178\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Agregar concepto: \'1010-3\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 12
- await testRunner.AndAsync("Ingresar Cantidad \'2\' y Precio Unitario \'2\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Ingreso la cantidad \'2\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 13
  await testRunner.AndAsync("Activar IGV \'Si\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -129,7 +129,7 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("Ingresar Cliente \'71310154\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 15
- await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'NOTA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'BOLETA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 16
  await testRunner.AndAsync("Seleccionar Tipo de pago \'Contado\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
@@ -138,7 +138,7 @@ await this.FeatureBackgroundAsync();
  await testRunner.AndAsync("Seleccionar Medio de Pago \'TDEB\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 18
- await testRunner.AndAsync("Ingresar Datos del Pago: \'XD\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("Ingresar Datos del Pago: \'NRO 5\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 19
  await testRunner.ThenAsync("Guardar venta", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

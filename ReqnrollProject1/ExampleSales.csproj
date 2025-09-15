@@ -23,6 +23,7 @@
     <Folder Include="Drivers\" />
     <Folder Include="Features\Ventas\" />
     <Folder Include="Support\" />
+    <Folder Include="TestResults\Screenshots\" />
   </ItemGroup>
 
 </Project>

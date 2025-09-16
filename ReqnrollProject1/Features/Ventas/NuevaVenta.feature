@@ -2,8 +2,10 @@
 
 Registrar una venta con tipo de pago al contado
 Background: 
-Given Inicio de sesión con usuario 'admin@plazafer.com' y contraseña 'calidad'
-And Se ingresa al módulo 'Nueva Venta'
+Given Ingreso al ambiente 'https://taller2025-qa.sigesonline.com/'
+And Inicio de sesión con usuario 'admin@plazafer.com' y contraseña 'calidad'
+And Se ingresa al módulo 'Venta'
+And Se ingresa al submódulo 'Nueva Venta'
 
 @NuevaVenta
 

@@ -2,7 +2,6 @@ using ExampleSales.Pages.Ventas;
 using OpenQA.Selenium;
 using Reqnroll;
 using System;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace ExampleSales.StepDefinitions
 {

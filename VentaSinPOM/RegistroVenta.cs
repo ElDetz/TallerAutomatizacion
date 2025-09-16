@@ -119,9 +119,11 @@ namespace VentaSinPOM
             information.SendKeys("nro 5");
 
             //GUARDAR VENTA
-            var saveSale = _driver.FindElement(By.XPath("//button[normalize-space()='GUARDAR VENTA']"));
-            saveSale.Click();
-            Thread.Sleep(6000);
+            var saveSale = By.XPath("//button[normalize-space()='GUARDAR VENTA']");
+            ClickButton(saveSale);
+            //Thread.Sleep(6000);
+            WebDriverWait wait3 = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
+            wait3.Until(ExpectedConditions.InvisibilityOfElementLocated(By.ClassName("block-ui-overlay")));
         }
 
         //FUNCIONES REUTILIZABLES

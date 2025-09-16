@@ -158,37 +158,21 @@ namespace ExampleSales.Pages.Helpers
             }
         }
 
-        public bool ClickButton(By _button)
+        public void ClickButton(By locator)
         {
-            try
-            {
+            var elements = driver.FindElements(locator);
+            if (elements.Count == 0)
+                throw new InvalidOperationException($"El elemento con el localizador '{locator}' no se encontró.");
 
-                if (driver.FindElements(_button).Count == 0)
-                {
-                    Console.WriteLine($"[INFO] El elemento con el localizador {_button} no se encontró.");
-                    return false;
-                }
+            Delay(2);
+            WaitForOverlayToDisappear();
 
-                Delay(2);
-                WaitForOverlayToDisappear();
+            var element = elements.First();
+            if (!element.Displayed || !element.Enabled)
+                throw new InvalidOperationException($"El botón con el localizador '{locator}' está deshabilitado o no visible.");
 
-                // Verifica si el botón está visible y habilitado antes de intentar hacer clic
-                var element = driver.FindElement(_button);
-                if (!element.Displayed || !element.Enabled)
-                {
-                    Console.WriteLine($"[INFO] El botón con el localizador {_button} está deshabilitado o no visible. No se puede hacer clic.");
-                    return false;
-                }
-
-                wait.Until(ExpectedConditions.ElementToBeClickable(_button));
-                element.Click();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[ERROR] No se pudo hacer clic en el botón {_button}: {ex.Message}");
-                return false;
-            }
+            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+            element.Click();
         }
 
         // MODALES

@@ -20,18 +20,18 @@ namespace VentaConPOM.Features.Restaurante
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("RegistrarFactura")]
+    [NUnit.Framework.DescriptionAttribute("TomarAtencion")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class RegistrarFacturaFeature
+    public partial class TomarAtencionFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Restaurante", "RegistrarFactura", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Restaurante", "TomarAtencion", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "RegistrarFactura.feature"
+#line 1 "TomarAtencion.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -93,20 +93,23 @@ await testRunner.GivenAsync("Ingreso al ambiente \'https://pruebas-qa.sigesonlin
 await testRunner.AndAsync("Inicio de sesión con usuario \'admin@tintoymadero.com\' y contraseña \'calidad\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 6
-await testRunner.AndAsync("Se ingresa al módulo \'Nueva Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+await testRunner.AndAsync("Se ingresa al módulo \'Restaurante\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 7
+await testRunner.AndAsync("Se ingresa al submódulo \'Atención\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[scenario name]")]
+        [NUnit.Framework.DescriptionAttribute("CP0072 - Agregar ítem a la orden con una cantidad negativa \'-1\'")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public async System.Threading.Tasks.Task ScenarioName()
+        public async System.Threading.Tasks.Task CP0072_AgregarItemALaOrdenConUnaCantidadNegativa_1()
         {
             string[] tagsOfScenario = new string[] {
                     "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("[scenario name]", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("CP0072 - Agregar ítem a la orden con una cantidad negativa \'-1\'", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -119,14 +122,33 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 await this.FeatureBackgroundAsync();
 #line hidden
-#line 10
- await testRunner.GivenAsync("[context]", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
 #line 11
- await testRunner.WhenAsync("[action]", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.GivenAsync("Se seleciona el tipo de atencion \'Con mesa\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 12
- await testRunner.ThenAsync("[outcome]", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.AndAsync("Se selecciona el ambiente \'PRINCIPAL\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 13
+ await testRunner.AndAsync("Seleccion de la mesa \'1\' en estado \'disponible\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 14
+ await testRunner.AndAsync("Se selecciona el mozo \'DIEGO EDUARDO CRUZ ORELLANA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                            "Orden",
+                            "Concepto",
+                            "Cantidad",
+                            "Anotacion"});
+                table1.AddRow(new string[] {
+                            "ITEM",
+                            "CARTA 1/4 POLLO A LA BRASA C/PT",
+                            "-1",
+                            ""});
+#line 15
+ await testRunner.WhenAsync("Se ingresa las siguientes ordenes:", ((string)(null)), table1, "When ");
+#line hidden
+#line 19
+ await testRunner.ThenAsync("Se procede a \'guardar\' la orden \'\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

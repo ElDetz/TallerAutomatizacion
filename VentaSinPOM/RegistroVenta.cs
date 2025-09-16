@@ -15,7 +15,7 @@ namespace VentaSinPOM
         public void Setup()
         {
             _driver = new ChromeDriver();
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
         }
 
         [Test]
@@ -24,42 +24,38 @@ namespace VentaSinPOM
             // NAVEGAR EN URL
             _driver.Navigate().GoToUrl("https://taller2025-qa.sigesonline.com/");
 
-            WebDriverWait espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-
-            // LOCALIZADORES DE ELEMENTOS 
             var usernameLocator = By.Id("Email");
             var passwordField = _driver.FindElement(By.XPath("//input[@id='Password']"));
             var loginButton = _driver.FindElement(By.XPath("//button[contains(text(),'Iniciar')]"));
 
             //INICIAR SESIÓN CON CREDENCIALES
-            var usernameField = espera.Until(ExpectedConditions.ElementIsVisible(usernameLocator));
+            var usernameField = _wait.Until(ExpectedConditions.ElementIsVisible(usernameLocator));
             usernameField.SendKeys("admin@plazafer.com");
             passwordField.SendKeys("calidad");
             loginButton.Click();
 
             // BOTÓN ACEPTAR
-            var acceptButton = espera.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[contains(text(),'Aceptar')]")));
+            var acceptButton = _wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[contains(text(),'Aceptar')]")));
             acceptButton.Click();
 
-            //INGRESAR AL MÓDULO VENTA
-            var saleButton = espera.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Venta']")));
+            //1. SELECCIONAR EL MÓDULO VENTA
+            var saleButton = _wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Venta']")));
             saleButton.Click();
 
-            // INGRESAR AL SUBMÓDULO NUEVA VENTA
+            //2. SELECCIONAR EL SUB-MÓDULO NUEVA VENTA
             var newSaleButton = _driver.FindElement(By.XPath("//a[normalize-space()='Nueva Venta']"));
             newSaleButton.Click();
             Thread.Sleep(12000);
 
-            //SELECCIONAR UN PRODUCTO
+            //3. AGREGAR UN CONCEPTO "1010-3"
             try
             {
-                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
                 var conceptSelection = By.XPath("//body/div[@id='wrapper']/div[1]/section[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/registrador-detalles[1]/div[1]/div[1]/selector-concepto-comercial[1]/ng-form[1]/div[1]/div[3]/div[1]/div[1]/span[1]/span[1]/span[1]");
-                wait.Until(ExpectedConditions.ElementIsVisible(conceptSelection));
+                _wait.Until(ExpectedConditions.ElementIsVisible(conceptSelection));
                 IWebElement dropdown = _driver.FindElement(conceptSelection);
                 dropdown.Click();
                 var SelectODropdownOptions = By.CssSelector(".select2-results__options");
-                wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
+                _wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
                 IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"1010-3"}')]"));
                 optionElement.Click();
                 Thread.Sleep(2000);
@@ -69,61 +65,60 @@ namespace VentaSinPOM
                 Console.WriteLine($"Error: No se encontró la opción '{"1010-3"}' en el menú desplegable. Detalle: {ex.Message}");
             }
 
-            //INGRESAR LA CANTIDAD DEL PRODUCTO
+            //4. INGRESAR LA CANTIDAD "2" 
             var conceptAmount = By.Id("cantidad-0");
-            WebDriverWait wait1 = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            var element = wait1.Until(ExpectedConditions.ElementToBeClickable(conceptAmount));
+            var element = _wait.Until(ExpectedConditions.ElementToBeClickable(conceptAmount));
             element.Click();
             element.SendKeys(Keys.Control + "a");
-            wait1.Until(driver => element.GetAttribute("value").Length >= 0);
+            _wait.Until(driver => element.GetAttribute("value").Length >= 0);
             element.SendKeys("2");
 
-            //ACTIVAR IGV
+            //5. ACTIVAR IGV "SÍ"
             var igv = _driver.FindElement(By.Id("ventaigv0"));
             igv.Click();
 
-            //SELECCIONAR EL DOC. DEL CLIENTE
+            //6. INGRESAR CLIENTE "71310154"
             var client = By.Id("DocumentoIdentidad");
             var element2 = _driver.FindElement(client);
             element2.Click();
             element2.SendKeys(Keys.Control + "a");
-            element2.SendKeys("72380461");
+            element2.SendKeys("71310154");
             element2.SendKeys(Keys.Enter);
 
-            //SELECCIONAR COMPROBANTE
+            //7. SELECCIONAR TIPO DE COMPROBANTE "BOLETA"
             try
             {
-                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
                 var voucher = By.XPath("//body/div[@id='wrapper']/div[1]/section[1]/div[1]/div[1]/div[1]/form[1]/div[2]/facturacion-venta[1]/form[1]/div[1]/div[2]/div[1]/div[6]/selector-comprobante[1]/div[1]/ng-form[1]/div[1]/div[1]/span[1]/span[1]/span[1]");
-                wait.Until(ExpectedConditions.ElementIsVisible(voucher));
+                _wait.Until(ExpectedConditions.ElementIsVisible(voucher));
 
                 IWebElement dropdown = _driver.FindElement(voucher);
                 dropdown.Click();
                 var SelectODropdownOptions = By.CssSelector(".select2-results__options");
-                wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
+                _wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
 
-                IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"NOTA"}')]"));
+                IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"BOLETA"}')]"));
                 optionElement.Click();
             }
             catch (NoSuchElementException ex)
             {
                 Console.WriteLine($"Error: No se encontró la opción '{"BOLETA"}' en el menú desplegable. Detalle: {ex.Message}");
             }
+            //8. SELECCIONAR TIPO DE PAGO "CONTADO"
+            /*var cashPayment = By.Id("radio1");
+            ClickButton(cashPayment);*/
 
-            //SELECCIONAR MEDIO DE PAGO
-            var DebitCardButton = By.Id("labelMedioPago-0-18");
-            ClickButton(DebitCardButton);
+            //9. SELECCIONAR MEDIO DE PAGO "CONTADO"
+            var debitCardButton = By.Id("labelMedioPago-0-18");
+            ClickButton(debitCardButton);
 
-            //INGRESAR INFORMACIÓN
+            //10. INGRESAR INFORMACIÓN DEL PAGO
             var information = _driver.FindElement(By.XPath("//div[@class='box box-primary box-solid']//textarea[@id='informacion']"));
             information.SendKeys("nro 5");
 
-            //GUARDAR VENTA
-            var saveSale = By.XPath("//button[normalize-space()='GUARDAR VENTA']");
-            ClickButton(saveSale);
-            //Thread.Sleep(6000);
-            WebDriverWait wait3 = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
-            wait3.Until(ExpectedConditions.InvisibilityOfElementLocated(By.ClassName("block-ui-overlay")));
+            //11. GUARDAR VENTA
+            var saveSale = _driver.FindElement(By.XPath("//button[normalize-space()='GUARDAR VENTA']"));
+            saveSale.Click();
+            Thread.Sleep(6000);
         }
 
         //FUNCIONES REUTILIZABLES
@@ -139,11 +134,11 @@ namespace VentaSinPOM
                 try
                 {
                     IWebElement overlay = driver.FindElement(overlayLocator);
-                    return !overlay.Displayed; // Espera hasta que el overlay no esté visible
+                    return !overlay.Displayed; 
                 }
                 catch (NoSuchElementException)
                 {
-                    return true; // Si no se encuentra, el overlay ya desapareció
+                    return true;
                 }
             });
         }

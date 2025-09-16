@@ -1,8 +1,9 @@
 
+using ExampleSales.Pages;
 using Microsoft.VisualBasic;
 using OpenQA.Selenium;
-using ExampleSales.Pages;
 using System;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace ExampleSales.StepDefinitions
 {
@@ -18,6 +19,12 @@ namespace ExampleSales.StepDefinitions
             accessPage = new AccessPage(driver);
         }
 
+        [Given("Ingreso al ambiente {string}")]
+        public void GivenIngresoAlAmbiente(string _ambiente)
+        {
+            accessPage.OpenToApplication(_ambiente);
+        }
+
         [Given(@"Inicio de sesión con usuario '([^']*)' y contraseña '([^']*)'")]
         public void Login(string _user, string _password)
         {
@@ -30,11 +37,11 @@ namespace ExampleSales.StepDefinitions
             accessPage.enterModulo(_modulo);
         }
 
-
-        [When("Se ingresa al módulo {string}")]
-        public void WhenSeIngresaAlModulo(string _modulo)
+        [Given("Se ingresa al submódulo {string}")]
+        public void GivenSeIngresaAlSubmodulo(string _submodulo)
         {
-            accessPage.enterModulo(_modulo);
+            accessPage.enterSubModulo(_submodulo);
         }
+
     }
 }

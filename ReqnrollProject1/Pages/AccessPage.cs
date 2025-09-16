@@ -24,11 +24,17 @@ namespace ExampleSales.Pages
         private By VentaField = By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Venta']");
         private By NuevaVentaField = By.XPath("//a[normalize-space()='Nueva Venta']");
 
+        private By RestauranteField = By.XPath("//a[@class='menu-lista-cabecera']/span[text()='Restaurante']");
+        private By AtencionField = By.XPath("//a[normalize-space()='Atención']");
+
+        public void OpenToApplication(string _ambiente)
+        {
+            driver.Url = _ambiente;
+        }
 
         // INICIO DE SESION
         public void LoginToApplication(string _user, string _password)
         {
-            driver.Url = "https://taller2025-qa.sigesonline.com/";
             utilities.InputTexto(usernameField, _user); // campo user
             utilities.InputTexto(passwordField, _password); // campo contraseña
             utilities.ClickButton(loginButton); // boton login
@@ -39,15 +45,18 @@ namespace ExampleSales.Pages
         public void enterModulo(string _modulo)
         {
             utilities.Delay(2);
-            utilities.ClickButton(VentaField);
-            utilities.WaitForOverlayToDisappear();
-            utilities.Delay(2);
 
             switch (_modulo)
             {
-                case "Nueva Venta":
-                    utilities.VisibilidadElement(NuevaVentaField);
-                    utilities.ClickButton(NuevaVentaField);
+                case "Venta":
+                    utilities.VisibilidadElement(VentaField);
+                    utilities.ClickButton(VentaField);
+
+                    break;
+
+                case "Restaurante":
+                    utilities.VisibilidadElement(RestauranteField);
+                    utilities.ClickButton(RestauranteField);
 
                     break;
 
@@ -56,6 +65,31 @@ namespace ExampleSales.Pages
             }
 
             utilities.Delay(4);
+        }
+
+        public void enterSubModulo(string _subModulo)
+        {
+            utilities.Delay(2);
+
+            switch (_subModulo)
+            {
+                case "Nueva Venta":
+                    utilities.VisibilidadElement(NuevaVentaField);
+                    utilities.ClickButton(NuevaVentaField);
+
+                    break;
+
+                case "Atención":
+                    utilities.VisibilidadElement(AtencionField);
+                    utilities.ClickButton(AtencionField);
+
+                    break;
+
+                default:
+                    throw new ArgumentException($"El {_subModulo} no es válido.");
+            }
+
+            utilities.Delay(2);
         }
     }
 }

@@ -101,14 +101,14 @@ await testRunner.AndAsync("Se ingresa al submódulo \'Atención\'", ((string)(nu
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("CP0072 - Agregar ítem a la orden con una cantidad negativa \'-1\'")]
-        [NUnit.Framework.CategoryAttribute("tag1")]
-        public async System.Threading.Tasks.Task CP0072_AgregarItemALaOrdenConUnaCantidadNegativa_1()
+        [NUnit.Framework.DescriptionAttribute("CP0002 - Registro de orden con ítem y cantidad positiva")]
+        [NUnit.Framework.CategoryAttribute("ItemDeUnaOrdenAtencionConMesa")]
+        public async System.Threading.Tasks.Task CP0002_RegistroDeOrdenConItemYCantidadPositiva()
         {
             string[] tagsOfScenario = new string[] {
-                    "tag1"};
+                    "ItemDeUnaOrdenAtencionConMesa"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("CP0072 - Agregar ítem a la orden con una cantidad negativa \'-1\'", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("CP0002 - Registro de orden con ítem y cantidad positiva", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -123,15 +123,12 @@ this.ScenarioInitialize(scenarioInfo);
 await this.FeatureBackgroundAsync();
 #line hidden
 #line 11
- await testRunner.GivenAsync("Se seleciona el tipo de atencion \'Con mesa\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("Se selecciona el ambiente \'PRINCIPAL\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 12
- await testRunner.AndAsync("Se selecciona el ambiente \'PRINCIPAL\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 13
  await testRunner.AndAsync("Seleccion de la mesa \'1\' en estado \'disponible\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 14
+#line 13
  await testRunner.AndAsync("Se selecciona el mozo \'DIEGO EDUARDO CRUZ ORELLANA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
                 global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
@@ -142,12 +139,114 @@ await this.FeatureBackgroundAsync();
                 table1.AddRow(new string[] {
                             "ITEM",
                             "CARTA 1/4 POLLO A LA BRASA C/PT",
-                            "-1",
-                            ""});
-#line 15
+                            "1",
+                            "Sin ensalada"});
+#line 14
  await testRunner.WhenAsync("Se ingresa las siguientes ordenes:", ((string)(null)), table1, "When ");
 #line hidden
-#line 19
+#line 18
+ await testRunner.ThenAsync("Se procede a \'guardar\' la orden \'\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("CP0001 - Agregar ítem a la orden con una cantidad negativa \'-1\'")]
+        [NUnit.Framework.CategoryAttribute("ItemDeUnaOrdenAtencionConMesa")]
+        public async System.Threading.Tasks.Task CP0001_AgregarItemALaOrdenConUnaCantidadNegativa_1()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ItemDeUnaOrdenAtencionConMesa"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("CP0001 - Agregar ítem a la orden con una cantidad negativa \'-1\'", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 3
+await this.FeatureBackgroundAsync();
+#line hidden
+#line 23
+ await testRunner.GivenAsync("Se selecciona el ambiente \'PRINCIPAL\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 24
+ await testRunner.AndAsync("Seleccion de la mesa \'1\' en estado \'disponible\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 25
+ await testRunner.AndAsync("Se selecciona el mozo \'DIEGO EDUARDO CRUZ ORELLANA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                            "Orden",
+                            "Concepto",
+                            "Cantidad",
+                            "Anotacion"});
+                table2.AddRow(new string[] {
+                            "ITEM",
+                            "CARTA 1/4 POLLO A LA BRASA C/PT",
+                            "-1",
+                            ""});
+#line 26
+ await testRunner.WhenAsync("Se ingresa las siguientes ordenes:", ((string)(null)), table2, "When ");
+#line hidden
+#line 30
+ await testRunner.ThenAsync("Se procede a \'guardar\' la orden \'\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("CP0003 - Agregar ítem a la orden con una cantidad de \'1\'")]
+        [NUnit.Framework.CategoryAttribute("ItemDeUnaOrdenAtencionConMesa")]
+        public async System.Threading.Tasks.Task CP0003_AgregarItemALaOrdenConUnaCantidadDe1()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ItemDeUnaOrdenAtencionConMesa"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("CP0003 - Agregar ítem a la orden con una cantidad de \'1\'", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 35
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 3
+await this.FeatureBackgroundAsync();
+#line hidden
+#line 36
+ await testRunner.GivenAsync("Se selecciona el ambiente \'PRINCIPAL\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 37
+ await testRunner.AndAsync("Seleccion de la mesa \'1\' en estado \'disponible\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 38
+ await testRunner.AndAsync("Se selecciona el mozo \'DIEGO EDUARDO CRUZ ORELLANA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                            "Orden",
+                            "Concepto",
+                            "Cantidad",
+                            "Anotacion"});
+                table3.AddRow(new string[] {
+                            "ITEM",
+                            "CARTA 1/4 POLLO A LA BRASA C/PT",
+                            "1",
+                            "Sin ensalada"});
+#line 39
+ await testRunner.WhenAsync("Se ingresa las siguientes ordenes:", ((string)(null)), table3, "When ");
+#line hidden
+#line 43
  await testRunner.ThenAsync("Se procede a \'guardar\' la orden \'\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

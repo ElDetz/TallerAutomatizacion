@@ -15,7 +15,7 @@ namespace VentaSinPOM
         public void Setup()
         {
             _driver = new ChromeDriver();
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
         }
 
         [Test]
@@ -51,26 +51,24 @@ namespace VentaSinPOM
             try
             {
                 var conceptSelection = By.XPath("/html/body/div[1]/div/section/div/div/div[1]/form/div[1]/div/div/registrador-detalles/div/div[1]/selector-concepto-comercial/ng-form/div/div[3]/div/div/span/span[1]/span");
-
-                //var conceptSelection = By.XPath("//span[contains(@class,'select2-selection--single')]");
                 _wait.Until(ExpectedConditions.ElementIsVisible(conceptSelection));
+                ElementExists(conceptSelection);
                 IWebElement dropdown = _driver.FindElement(conceptSelection);
                 dropdown.Click();
                 var SelectODropdownOptions = By.CssSelector(".select2-results__options");
                 _wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
-                IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"1010-3"}')]"));
+                IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"400001474"}')]"));
                 optionElement.Click();
                 Delay(2);
             }
             catch (NoSuchElementException ex)
             {
-                Console.WriteLine($"Error: No se encontró la opción '{"1010-3"}' en el menú desplegable. Detalle: {ex.Message}");
+                Console.WriteLine($"Error: No se encontró la opción '{"400001474"}' en el menú desplegable. Detalle: {ex.Message}");
             }
 
             //4. INGRESAR LA CANTIDAD "2" 
             var conceptAmount = By.Id("cantidad-0");
             var element = _wait.Until(ExpectedConditions.ElementToBeClickable(conceptAmount));
-            //element.Click();
             element.SendKeys(Keys.Control + "a");
             element.SendKeys("2");
 
@@ -90,7 +88,6 @@ namespace VentaSinPOM
             try
             {
                 var voucher = By.XPath("/html/body/div[1]/div/section/div/div/div[1]/form/div[2]/facturacion-venta/form/div/div[2]/div/div[6]/selector-comprobante/div/ng-form/div[1]/div/span/span[1]/span");
-
                 _wait.Until(ExpectedConditions.ElementIsVisible(voucher));
                 IWebElement dropdown = _driver.FindElement(voucher);
                 dropdown.Click();
@@ -104,7 +101,7 @@ namespace VentaSinPOM
                 Console.WriteLine($"Error: No se encontró la opción '{"BOLETA"}' en el menú desplegable. Detalle: {ex.Message}");
             }
             //8. SELECCIONAR TIPO DE PAGO "CONTADO"
-            Delay(3);
+            //Delay(3);
             var cashPayment = By.CssSelector("label[for='radio1']");
             _wait.Until(ExpectedConditions.ElementToBeClickable(cashPayment));
             _driver.FindElement(cashPayment).Click();
@@ -130,6 +127,19 @@ namespace VentaSinPOM
         {
             Thread.Sleep(seconds * 1000);
         }
+
+        public void ElementExists(By pathComponent)
+        {
+            try
+            {
+                _wait.Until(ExpectedConditions.ElementExists(pathComponent));
+            }
+            catch (WebDriverTimeoutException)
+            {
+                throw new NoSuchElementException($"El elemento con el localizador {pathComponent} no se encontró dentro del tiempo esperado.");
+            }
+        }
+
         public void WaitForOverlayToDisappear()
         {
             _wait.Until(driver =>

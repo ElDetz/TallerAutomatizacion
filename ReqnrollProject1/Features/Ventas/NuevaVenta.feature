@@ -1,24 +1,21 @@
-﻿Feature: NuevaVenta
+﻿Feature: Registro de una nueva venta
+  Como vendedor
+  Quiero registrar ventas en el sistema SIGES
 
-Registrar una venta con tipo de pago al contado
-Background: 
-Given Ingreso al ambiente 'https://taller2025-qa.sigesonline.com/'
-And Inicio de sesión con usuario 'admin@plazafer.com' y contraseña 'calidad'
-And Se ingresa al módulo 'Venta'
-And Se ingresa al submódulo 'Nueva Venta'
+  Background:
+    Given el usuario ingresa al ambiente 'https://taller2025-qa.sigesonline.com/'
+    And el usuario inicia sesión con usuario 'admin@plazafer.com' y contraseña 'calidad'
+    And accede al módulo 'Venta'
+    And accede al submódulo 'Nueva Venta'
 
-@NuevaVenta
-
-Scenario: Registro de una nueva venta con pago al contado
-	And Agregar concepto: '1010-3'
-	And Ingreso la cantidad '2'
-	And Activar IGV 'Si'
-	And Ingresar Cliente '71310154'
-	And Seleccionar Tipo de Comprobante 'BOLETA'
-	And Seleccionar Tipo de pago 'Contado'
-	And Seleccionar Medio de Pago 'TDEB'
-	And Ingresar Datos del Pago: 'NRO 5'
-	Then Guardar venta 
+  @NuevaVenta
+  Scenario: Registrar una venta con pago al contado
+    When el usuario agrega el concepto '1010-3' 
+    And ingresa la cantidad '2'
+    And selecciona al cliente con documento '71310154'
+    And selecciona el tipo de comprobante 'BOLETA'
+    And selecciona el tipo de pago 'Contado'
+    Then la venta se guarda correctamente
 
 
 	

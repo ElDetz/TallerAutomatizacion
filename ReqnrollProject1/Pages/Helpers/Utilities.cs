@@ -157,7 +157,11 @@ namespace ExampleSales.Pages.Helpers
                 throw new NoSuchElementException($"El elemento con el localizador {_button} no se encontró en el DOM dentro del tiempo esperado.");
             }
         }
-
+        public void ClickB(By locator)
+        {
+            var element = driver.FindElement(locator);
+            element.Click();
+        }
         public void ClickButton(By locator)
         {
             var elements = driver.FindElements(locator);
@@ -300,6 +304,12 @@ namespace ExampleSales.Pages.Helpers
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.CssSelector("div.block-ui-overlay")));
+        }
+
+        public void EnterText(By _path, string _field)
+        {
+            var element = driver.FindElement(_path);
+            element.SendKeys(_field);
         }
 
         public void EnterField(By _path, string _field)

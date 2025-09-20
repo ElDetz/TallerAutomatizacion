@@ -19,26 +19,26 @@ namespace ExampleSales.StepDefinitions
             accessPage = new AccessPage(driver);
         }
 
-        [Given("Ingreso al ambiente {string}")]
-        public void GivenIngresoAlAmbiente(string _ambiente)
+        [Given("el usuario ingresa al ambiente {string}")]
+        public void GivenElUsuarioIngresaAlAmbiente(string _ambiente)
         {
             accessPage.OpenToApplication(_ambiente);
         }
 
-        [Given(@"Inicio de sesión con usuario '([^']*)' y contraseña '([^']*)'")]
-        public void Login(string _user, string _password)
+        [Given("el usuario inicia sesión con usuario {string} y contraseña {string}")]
+        public void GivenElUsuarioIniciaSesionConUsuarioYContrasena(string _user, string _password)
         {
             accessPage.LoginToApplication(_user, _password);
         }
 
-        [Given("Se ingresa al módulo {string}")]
-        public void GivenSeIngresaAlModulo(string _modulo)
+        [Given("accede al módulo {string}")]
+        public void GivenAccedeAlModulo(string _modulo)
         {
             accessPage.enterModulo(_modulo);
         }
 
-        [Given("Se ingresa al submódulo {string}")]
-        public void GivenSeIngresaAlSubmodulo(string _submodulo)
+        [Given("accede al submódulo {string}")]
+        public void GivenAccedeAlSubmodulo(string _submodulo)
         {
             accessPage.enterSubModulo(_submodulo);
         }

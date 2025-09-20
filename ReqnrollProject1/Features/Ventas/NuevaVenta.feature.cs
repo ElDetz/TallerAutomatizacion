@@ -20,16 +20,16 @@ namespace VentaConPOM.Features.Ventas
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("NuevaVenta")]
+    [NUnit.Framework.DescriptionAttribute("Registro de una nueva venta")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class NuevaVentaFeature
+    public partial class RegistroDeUnaNuevaVentaFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Ventas", "NuevaVenta", "Registrar una venta con tipo de pago al contado", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Ventas", "Registro de una nueva venta", "  Como vendedor\r\n  Quiero registrar ventas en el sistema SIGES", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "NuevaVenta.feature"
 #line hidden
@@ -84,33 +84,33 @@ namespace VentaConPOM.Features.Ventas
         
         public virtual async System.Threading.Tasks.Task FeatureBackgroundAsync()
         {
-#line 4
-#line hidden
 #line 5
-await testRunner.GivenAsync("Ingreso al ambiente \'https://taller2025-qa.sigesonline.com/\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
+  #line hidden
 #line 6
-await testRunner.AndAsync("Inicio de sesión con usuario \'admin@plazafer.com\' y contraseña \'calidad\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.GivenAsync("el usuario ingresa al ambiente \'https://taller2025-qa.sigesonline.com/\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 7
-await testRunner.AndAsync("Se ingresa al módulo \'Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("el usuario inicia sesión con usuario \'admin@plazafer.com\' y contraseña \'calidad\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 8
-await testRunner.AndAsync("Se ingresa al submódulo \'Nueva Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("accede al módulo \'Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 9
+    await testRunner.AndAsync("accede al submódulo \'Nueva Venta\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Registro de una nueva venta con pago al contado")]
+        [NUnit.Framework.DescriptionAttribute("Registrar una venta con pago al contado")]
         [NUnit.Framework.CategoryAttribute("NuevaVenta")]
-        public async System.Threading.Tasks.Task RegistroDeUnaNuevaVentaConPagoAlContado()
+        public async System.Threading.Tasks.Task RegistrarUnaVentaConPagoAlContado()
         {
             string[] tagsOfScenario = new string[] {
                     "NuevaVenta"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de una nueva venta con pago al contado", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registrar una venta con pago al contado", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 12
-this.ScenarioInitialize(scenarioInfo);
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -119,35 +119,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 4
-await this.FeatureBackgroundAsync();
+#line 5
+  await this.FeatureBackgroundAsync();
 #line hidden
 #line 13
- await testRunner.AndAsync("Agregar concepto: \'1010-3\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.WhenAsync("el usuario agrega el concepto \'1010-3\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 14
- await testRunner.AndAsync("Ingreso la cantidad \'2\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("ingresa la cantidad \'2\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 15
- await testRunner.AndAsync("Activar IGV \'Si\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("selecciona al cliente con documento \'71310154\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 16
- await testRunner.AndAsync("Ingresar Cliente \'71310154\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("selecciona el tipo de comprobante \'BOLETA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 17
- await testRunner.AndAsync("Seleccionar Tipo de Comprobante \'BOLETA\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+    await testRunner.AndAsync("selecciona el tipo de pago \'Contado\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 18
- await testRunner.AndAsync("Seleccionar Tipo de pago \'Contado\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 19
- await testRunner.AndAsync("Seleccionar Medio de Pago \'TDEB\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 20
- await testRunner.AndAsync("Ingresar Datos del Pago: \'NRO 5\'", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 21
- await testRunner.ThenAsync("Guardar venta", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync("la venta se guarda correctamente", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

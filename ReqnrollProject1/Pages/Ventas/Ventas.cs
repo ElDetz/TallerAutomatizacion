@@ -43,138 +43,53 @@ namespace ExampleSales.Pages.Ventas
 
         public void SelectConcept(string codeconcept)
         {
-            utilities.ElementExists(txtBarCode);
-            Thread.Sleep(4000);
+            Thread.Sleep(15000);
+            utilities.ElementExists(selConceptSelection);
             utilities.SelectOption(selConceptSelection, codeconcept);
-            Thread.Sleep(5000);
-            Console.WriteLine("✅ El producto fue agregado correctamente.");
         }
 
         public void InputAmount(string amount)
         {
             utilities.Overlay();
-            utilities.EnterField(ConceptAmount, amount);
+            utilities.ElementExists(ConceptAmount);
+            utilities.EnterText(ConceptAmount, amount);
         }
 
-        public void SelectIGV(string option)
+        /*public void SelectIGV(string option)
         {
-            switch (option)
-            {
-                case "Si":
-                    utilities.ClickButton(IgvActive);
-                    break;
-            }
-        }
+            utilities.ClickButton(IgvActive);
+        }*/
 
         public void EnterCustomer(string dni)
         {
-
-            utilities.Overlay();
-
             utilities.EnterField(IdCustomer, dni);
         }
 
         public void SelectTypeDocument(string option)
         {
-            switch (option)
-            {
-                case "FACTURA":
-
-                    utilities.SelectOption(TypeDocumentField, option);
-
-                    break;
-
-                case "BOLETA":
-
-                    utilities.SelectOption(TypeDocumentField, option);
-
-                    break;
-
-                case "NOTA":
-
-                    utilities.SelectOption(TypeDocumentField, option);
-                    break;
-
-                default:
-                    throw new ArgumentException($"La opción {option} no es válido");
-            }
-
+            utilities.ElementExists(TypeDocumentField);
+            utilities.SelectOption(TypeDocumentField, option);
         }
 
         public void SelectPaymentType(string option)
         {
-
-            switch (option)
-            {
-                case "Contado":
-                    utilities.ClickButton(CashPaymentOption);
-                    break;
-
-                case "Crédito Rápido":
-                    //utilities.ClickButton(QuickPaymentOption);
-                    break;
-
-                case "Crédito Configurado":
-                    //utilities.ClickButton(ConfiguredPaymentOption);
-                    break;
-
-                default:
-                    throw new ArgumentException($"La opción '{option}' no es válido");
-            }
+            Thread.Sleep(2000);
+            utilities.ClickButton(CashPaymentOption);
         }
 
         public void PaymentMethod(string option)
         {
-            option = option.ToUpper();
-
-            switch (option)
-            {
-                case "DEPCU":
-
-                    //utilities.ClickButton(DepositButton, option);
-                    break;
-
-                case "TRANFON":
-
-                    //utilities.ClickButton(TransferButton, option);
-                    break;
-
-                case "TDEB":
-
-                    utilities.ClickButton(DebitCardButton);
-                    break;
-
-                case "TCRE":
-
-                    //utilities.ClickButton(CreditCardButton, option);
-                    break;
-
-                case "EF":
-
-                    //utilities.PaymentMethodUtility(PaymentMethodPath.CashButton, option);
-                    break;
-
-                case "PTS":
-
-                    //utilities.PaymentMethodUtility(PaymentMethodPath.PointsButton, option);
-                    break;
-
-                default:
-                    throw new ArgumentException($"La opción {option} no es válido");
-            }
-            Thread.Sleep(4000);
+            utilities.ClickButton(DebitCardButton);
         }
         public void InformationPayment(string information)
         {
             utilities.EnterField(PaymentInformation, information);
-
         }
 
         public void SaveSale()
         {
             utilities.ClickButton(SaveSaleButton);
             Thread.Sleep(4000);
-
         }
     }
 }

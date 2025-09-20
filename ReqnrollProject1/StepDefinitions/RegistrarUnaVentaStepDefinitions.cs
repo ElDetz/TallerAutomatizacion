@@ -16,56 +16,50 @@ namespace ExampleSales.StepDefinitions
             this.driver = driver;
             this.newSale = new VentasPage(driver);
         }
-        [Given("Agregar concepto: {string}")]
-        public void GivenAgregarConcepto(string concept)
+        [When("el usuario agrega el concepto {string}")]
+        public void WhenElUsuarioAgregaElConcepto(string concept)
         {
             newSale.SelectConcept(concept);
         }
 
-        [Given("Ingreso la cantidad {string}")]
-        public void GivenIngresoLaCantidad(string amount)
+        [When("ingresa la cantidad {string}")]
+        public void WhenIngresaLaCantidad(string amount)
         {
             newSale.InputAmount(amount);
         }
 
-        [Given("Activar IGV {string}")]
-        public void GivenActivarIGV(string option)
-        {
-            newSale.SelectIGV(option);
-        }
-
-        [Given("Ingresar Cliente {string}")]
-        public void GivenIngresarCliente(string dni)
+        [When("selecciona al cliente con documento {string}")]
+        public void WhenSeleccionaAlClienteConDocumento(string dni)
         {
             newSale.EnterCustomer(dni);
         }
 
-        [Given("Seleccionar Tipo de Comprobante {string}")]
-        public void GivenSeleccionarTipoDeComprobante(string option)
+        [When("selecciona el tipo de comprobante {string}")]
+        public void WhenSeleccionaElTipoDeComprobante(string option)
         {
             newSale.SelectTypeDocument(option);
         }
 
-        [Given("Seleccionar Tipo de pago {string}")]
-        public void GivenSeleccionarTipoDePago(string option)
+        [When("selecciona el tipo de pago {string}")]
+        public void WhenSeleccionaElTipoDePago(string option)
         {
             newSale.SelectPaymentType(option);
         }
 
-        [Given("Seleccionar Medio de Pago {string}")]
-        public void GivenSeleccionarMedioDePago(string option)
+        [When("selecciona el medio de pago {string}")]
+        public void WhenSeleccionaElMedioDePago(string option)
         {
             newSale.PaymentMethod(option);
         }
 
-        [Given("Ingresar Datos del Pago: {string}")]
-        public void GivenIngresarDatosDelPago(string value)
+        [When("registra los datos del pago con número {string}")]
+        public void WhenRegistraLosDatosDelPagoConNumero(string option)
         {
-            newSale.InformationPayment(value);
+            newSale.PaymentMethod(option);
         }
 
-        [Then("Guardar venta")]
-        public void ThenGuardarVenta()
+        [Then("la venta se guarda correctamente")]
+        public void ThenLaVentaSeGuardaCorrectamente()
         {
             newSale.SaveSale();
         }

@@ -35,11 +35,11 @@ namespace ExampleSales.Pages
         // INICIO DE SESION
         public void LoginToApplication(string _user, string _password)
         {
-            utilities.InputTexto(usernameField, _user); // campo user
-            utilities.InputTexto(passwordField, _password); // campo contraseña
-            utilities.ClickButton(loginButton); // boton login
+            utilities.EnterText(usernameField, _user); // campo user
+            utilities.EnterText(passwordField, _password); // campo contraseña
+            utilities.ClickB(loginButton); // boton login
             utilities.VisibilidadElement(acceptButton);
-            utilities.ClickButton(acceptButton); // boton aceptar
+            utilities.ClickB(acceptButton); // boton aceptar
         }
 
         public void enterModulo(string _modulo)
@@ -50,13 +50,13 @@ namespace ExampleSales.Pages
             {
                 case "Venta":
                     utilities.VisibilidadElement(VentaField);
-                    utilities.ClickButton(VentaField);
+                    utilities.ClickB(VentaField);
 
                     break;
 
                 case "Restaurante":
                     utilities.VisibilidadElement(RestauranteField);
-                    utilities.ClickButton(RestauranteField);
+                    utilities.ClickB(RestauranteField);
 
                     break;
 
@@ -75,13 +75,13 @@ namespace ExampleSales.Pages
             {
                 case "Nueva Venta":
                     utilities.VisibilidadElement(NuevaVentaField);
-                    utilities.ClickButton(NuevaVentaField);
+                    utilities.ClickB(NuevaVentaField);
 
                     break;
 
                 case "Atención":
                     utilities.VisibilidadElement(AtencionField);
-                    utilities.ClickButton(AtencionField);
+                    utilities.ClickB(AtencionField);
 
                     break;
 

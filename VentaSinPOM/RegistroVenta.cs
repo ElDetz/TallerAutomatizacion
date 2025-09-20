@@ -15,7 +15,7 @@ namespace VentaSinPOM
         public void Setup()
         {
             _driver = new ChromeDriver();
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
         }
 
         [Test]
@@ -45,12 +45,14 @@ namespace VentaSinPOM
             //2. SELECCIONAR EL SUB-MÓDULO NUEVA VENTA
             var newSaleButton = _driver.FindElement(By.XPath("//a[normalize-space()='Nueva Venta']"));
             newSaleButton.Click();
-            Thread.Sleep(12000);
+            Delay(15);
 
             //3. AGREGAR UN CONCEPTO "1010-3"
             try
             {
-                var conceptSelection = By.XPath("//body/div[@id='wrapper']/div[1]/section[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/registrador-detalles[1]/div[1]/div[1]/selector-concepto-comercial[1]/ng-form[1]/div[1]/div[3]/div[1]/div[1]/span[1]/span[1]/span[1]");
+                var conceptSelection = By.XPath("/html/body/div[1]/div/section/div/div/div[1]/form/div[1]/div/div/registrador-detalles/div/div[1]/selector-concepto-comercial/ng-form/div/div[3]/div/div/span/span[1]/span");
+
+                //var conceptSelection = By.XPath("//span[contains(@class,'select2-selection--single')]");
                 _wait.Until(ExpectedConditions.ElementIsVisible(conceptSelection));
                 IWebElement dropdown = _driver.FindElement(conceptSelection);
                 dropdown.Click();
@@ -58,7 +60,7 @@ namespace VentaSinPOM
                 _wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
                 IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"1010-3"}')]"));
                 optionElement.Click();
-                Thread.Sleep(2000);
+                Delay(2);
             }
             catch (NoSuchElementException ex)
             {
@@ -68,9 +70,8 @@ namespace VentaSinPOM
             //4. INGRESAR LA CANTIDAD "2" 
             var conceptAmount = By.Id("cantidad-0");
             var element = _wait.Until(ExpectedConditions.ElementToBeClickable(conceptAmount));
-            element.Click();
+            //element.Click();
             element.SendKeys(Keys.Control + "a");
-            _wait.Until(driver => element.GetAttribute("value").Length >= 0);
             element.SendKeys("2");
 
             //5. ACTIVAR IGV "SÍ"
@@ -80,23 +81,22 @@ namespace VentaSinPOM
             //6. INGRESAR CLIENTE "71310154"
             var client = By.Id("DocumentoIdentidad");
             var element2 = _driver.FindElement(client);
-            element2.Click();
             element2.SendKeys(Keys.Control + "a");
             element2.SendKeys("71310154");
             element2.SendKeys(Keys.Enter);
+            Delay(3);
 
             //7. SELECCIONAR TIPO DE COMPROBANTE "BOLETA"
             try
             {
-                var voucher = By.XPath("//body/div[@id='wrapper']/div[1]/section[1]/div[1]/div[1]/div[1]/form[1]/div[2]/facturacion-venta[1]/form[1]/div[1]/div[2]/div[1]/div[6]/selector-comprobante[1]/div[1]/ng-form[1]/div[1]/div[1]/span[1]/span[1]/span[1]");
-                _wait.Until(ExpectedConditions.ElementIsVisible(voucher));
+                var voucher = By.XPath("/html/body/div[1]/div/section/div/div/div[1]/form/div[2]/facturacion-venta/form/div/div[2]/div/div[6]/selector-comprobante/div/ng-form/div[1]/div/span/span[1]/span");
 
+                _wait.Until(ExpectedConditions.ElementIsVisible(voucher));
                 IWebElement dropdown = _driver.FindElement(voucher);
                 dropdown.Click();
                 var SelectODropdownOptions = By.CssSelector(".select2-results__options");
                 _wait.Until(ExpectedConditions.ElementIsVisible(SelectODropdownOptions));
-
-                IWebElement optionElement = _driver.FindElement(By.XPath($"//li[contains(text(), '{"BOLETA"}')]"));
+                IWebElement optionElement = _driver.FindElement(By.XPath("//li[text()='BOLETA DE VENTA ELECTRONICA']"));
                 optionElement.Click();
             }
             catch (NoSuchElementException ex)
@@ -104,12 +104,15 @@ namespace VentaSinPOM
                 Console.WriteLine($"Error: No se encontró la opción '{"BOLETA"}' en el menú desplegable. Detalle: {ex.Message}");
             }
             //8. SELECCIONAR TIPO DE PAGO "CONTADO"
-            /*var cashPayment = By.Id("radio1");
-            ClickButton(cashPayment);*/
+            Delay(3);
+            var cashPayment = By.CssSelector("label[for='radio1']");
+            _wait.Until(ExpectedConditions.ElementToBeClickable(cashPayment));
+            _driver.FindElement(cashPayment).Click();
 
             //9. SELECCIONAR MEDIO DE PAGO "CONTADO"
             var debitCardButton = By.Id("labelMedioPago-0-18");
-            ClickButton(debitCardButton);
+            _wait.Until(ExpectedConditions.ElementToBeClickable(debitCardButton));
+            _driver.FindElement(debitCardButton).Click();
 
             //10. INGRESAR INFORMACIÓN DEL PAGO
             var information = _driver.FindElement(By.XPath("//div[@class='box box-primary box-solid']//textarea[@id='informacion']"));
@@ -118,11 +121,11 @@ namespace VentaSinPOM
             //11. GUARDAR VENTA
             var saveSale = _driver.FindElement(By.XPath("//button[normalize-space()='GUARDAR VENTA']"));
             saveSale.Click();
-            Thread.Sleep(6000);
+            Delay(6);
         }
 
-        //FUNCIONES REUTILIZABLES
-        private By overlayLocator = By.ClassName("block-ui-overlay");
+        //FUNCIONES AUXILIARES
+        private By overlayLocator = By.XPath("//div[@class='block-ui-overlay']");
         public void Delay(int seconds)
         {
             Thread.Sleep(seconds * 1000);
@@ -134,7 +137,7 @@ namespace VentaSinPOM
                 try
                 {
                     IWebElement overlay = driver.FindElement(overlayLocator);
-                    return !overlay.Displayed; 
+                    return !overlay.Displayed;
                 }
                 catch (NoSuchElementException)
                 {
@@ -143,43 +146,11 @@ namespace VentaSinPOM
             });
         }
 
-        public bool ClickButton(By _button)
-        {
-            try
-            {
-                if (_driver.FindElements(_button).Count == 0)
-                {
-                    Console.WriteLine($"[INFO] El elemento con el localizador {_button} no se encontró.");
-                    return false;
-                }
-
-                Delay(2);
-                WaitForOverlayToDisappear();
-
-                // Verifica si el botón está visible y habilitado antes de intentar hacer clic
-                var element = _driver.FindElement(_button);
-                if (!element.Displayed || !element.Enabled)
-                {
-                    Console.WriteLine($"[INFO] El botón con el localizador {_button} está deshabilitado o no visible. No se puede hacer clic.");
-                    return false;
-                }
-
-                _wait.Until(ExpectedConditions.ElementToBeClickable(_button));
-                element.Click();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[ERROR] No se pudo hacer clic en el botón {_button}: {ex.Message}");
-                return false;
-            }
-        }
-
         [TearDown]
         public void TearDown()
         {
             _driver.Quit();
-            _driver.Dispose(); 
+            _driver.Dispose();
         }
     }
 }

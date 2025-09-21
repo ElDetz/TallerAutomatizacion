@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ExampleSales.Pages.Helpers
 {
@@ -310,6 +311,21 @@ namespace ExampleSales.Pages.Helpers
         {
             var element = driver.FindElement(_path);
             element.SendKeys(_field);
+        }
+
+        public void ClearAndEnterText(By _path, string _field)
+        {
+            var element = driver.FindElement(_path);
+            element.SendKeys(Keys.Control + "a");
+            EnterText(_path, _field);
+        }
+
+        public void ClearEnterTextAndSubmit(By _path, string _field)
+        {
+            var element = driver.FindElement(_path);
+            ClearAndEnterText(_path, _field);
+            element.SendKeys(Keys.Enter);
+            Delay(3);
         }
 
         public void EnterField(By _path, string _field)

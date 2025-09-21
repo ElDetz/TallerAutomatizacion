@@ -122,6 +122,7 @@ namespace VentaSinPOM
         }
 
         //FUNCIONES AUXILIARES
+
         private By overlayLocator = By.XPath("//div[@class='block-ui-overlay']");
         public void Delay(int seconds)
         {

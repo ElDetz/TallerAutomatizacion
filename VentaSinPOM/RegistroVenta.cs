@@ -45,7 +45,8 @@ namespace VentaSinPOM
             //2. SELECCIONAR EL SUB-MÓDULO NUEVA VENTA
             var newSaleButton = _driver.FindElement(By.XPath("//a[normalize-space()='Nueva Venta']"));
             newSaleButton.Click();
-            Delay(15);
+            Delay(10);
+           
 
             //3. AGREGAR UN CONCEPTO "1010-3"
             try
@@ -101,7 +102,6 @@ namespace VentaSinPOM
                 Console.WriteLine($"Error: No se encontró la opción '{"BOLETA"}' en el menú desplegable. Detalle: {ex.Message}");
             }
             //8. SELECCIONAR TIPO DE PAGO "CONTADO"
-            //Delay(3);
             var cashPayment = By.CssSelector("label[for='radio1']");
             _wait.Until(ExpectedConditions.ElementToBeClickable(cashPayment));
             _driver.FindElement(cashPayment).Click();

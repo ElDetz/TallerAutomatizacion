@@ -21,14 +21,14 @@ namespace ExampleLogin
         public void TestExampleSite()
         {
             // Navegar a la URL
-            _driver.Navigate().GoToUrl("https://testcore.sigesonline.com/");
+            _driver.Navigate().GoToUrl("https://taller2025-qa.sigesonline.com/");
 
             Thread.Sleep(4000);
 
             // Encontrar los elementos de login
             var usernameField = _driver.FindElement(By.XPath("//input[@id='Email']"));
             var passwordField = _driver.FindElement(By.XPath("//input[@id='Password']"));
-            var loginButton = _driver.FindElement(By.XPath("//button[contains(text(),'Iniciar')]"));
+            var loginButton = _driver.FindElement(By.XPath("//button[normalize-space()='Iniciar']"));
 
             usernameField.SendKeys("admin@plazafer.com");
             Thread.Sleep(2000);
